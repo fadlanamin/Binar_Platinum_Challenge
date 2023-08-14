@@ -14,7 +14,7 @@ swagger_template = dict(
 info= {
         'title': LazyString(lambda: 'API for Sentiment Analysis'),
         'version': LazyString(lambda: '1.0.0'),
-        'description': LazyString(lambda: 'API for Sentiment Analysis'),
+        'description': LazyString(lambda: 'Binar Platinum Challenge : API for Sentiment Analysis'),
     },
     host= LazyString(lambda: request.host) 
 )
