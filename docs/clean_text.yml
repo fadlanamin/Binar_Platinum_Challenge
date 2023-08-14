@@ -1,0 +1,11 @@
+tags: 
+  - name: Clean Text
+get: 
+  description: Text after gets cleaned
+responses: 
+    '200':
+      description: Successful response
+    '400': 
+      description: Bad Request
+    '500':
+      descrption: Internal Server Error

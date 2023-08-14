@@ -1,0 +1,16 @@
+tags:
+  - name: lstm model input
+get:
+  description:  lstm model input
+parameters:
+  - name: raw_text
+    in: formData
+    required: true
+    type: string
+responses:
+    '200':
+      description: Successful response
+    '400':
+      description: Bad Request
+    '500':
+      description: Internal Server Error
