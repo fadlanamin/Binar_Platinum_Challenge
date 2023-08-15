@@ -8,13 +8,19 @@ from sklearn.neural_network import MLPClassifier, MLPRegressor
 
 
 #Load the Neural Network model
-model_nn = pickle.load(open('Neural_Network/model.p', 'rb'))
-count_vect = pickle.load(open('Neural_Network/feature.p', 'rb'))
+model_nn = pickle.load(open('Neural_Network/neural_network_model.pkl', 'rb'))
+count_vect = pickle.load(open('Neural_Network/tfidf_vect.pkl', 'rb'))
 
 #Cleansing Function
 def text_cleansing(text):
-    clean_text = text.lower()
-    clean_text = re.sub(r'[^\w\s]', '',clean_text)
+    clean_text = re.sub(r'((www\.[^\s]+)|(https?://[^\s]+)|(http?://[^\s]+))|([#@]\S+)|user|\n|\t', ' ', text)
+    clean_text = re.sub(r'[^a-zA-Z]', ' ',clean_text)
+    clean_text = re.sub(r'\s+[a-zA-Z]\s+', ' ',clean_text)
+    clean_text = re.sub(r'\s+', ' ',clean_text)
+    clean_text = re.sub(r'rt @\w+:',' ',clean_text)
+    clean_text = re.sub(r'[^\w\s]', '', clean_text)
+    clean_text = clean_text.lower()
+    clean_text = clean_text.strip()
     return clean_text
 
 #Neural Netwotk Model Function for text input
@@ -36,6 +42,7 @@ def neural_network_upload(file_upload):
     nn_file.columns = ["text"]
     
     # Apply the Neural Network sentiment prediction to the text
+    nn_file['clean_text'] = nn_file.apply(lambda row : text_cleansing(row['text']), axis = 1)
     nn_file['sentiment'] = nn_file.apply(lambda row : neural_network_model(row['text']), axis = 1)
  
 

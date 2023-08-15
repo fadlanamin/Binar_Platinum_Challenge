@@ -15,6 +15,7 @@ info= {
         'title': LazyString(lambda: 'API for Sentiment Analysis'),
         'version': LazyString(lambda: '1.0.0'),
         'description': LazyString(lambda: 'Binar Platinum Challenge : API for Sentiment Analysis'),
+        'Author': LazyString(lambda: 'Kelompok 4 : Ahmad Fadlan Amin & Susilawaty Chen'),
     },
     host= LazyString(lambda: request.host) 
 )
@@ -57,6 +58,7 @@ def lstm_form():
     # Get text from input user
     raw_text = request.form["raw_text"]
     clean_text = text_cleansing(raw_text)
+
     # LSTM text
     results = model_lstm(clean_text)
     result_response = {"text_clean": clean_text, "results": results}
@@ -72,7 +74,7 @@ def LSTM_upload():
     # Read csv file to dataframe the analyize the sentiment
     df_lstm = lstm_upload(uploaded_file)
     result_response = df_lstm.T.to_dict()
-
+    
     return jsonify(result_response)
 
 
